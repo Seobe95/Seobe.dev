@@ -5,11 +5,11 @@ export const breakPoints = {
   small: '576px',
 }
 
-const theme = {
+const responsive = {
   mobile: `(max-width: ${breakPoints.small})`,
   tablet: `(max-width: ${breakPoints.medium})`,
   laptop: `(max-width: ${breakPoints.large})`,
   desktop: `(min-width: ${breakPoints.xlarge})`,
 }
 
-export default theme
+export default responsive

@@ -1,5 +1,3 @@
-import { DefaultTheme } from 'styled-components'
-
 export type Colors = {
   text: string
   element: string
@@ -7,28 +5,11 @@ export type Colors = {
   bg_page2: string
 }
 
-export type ResponseType = {
-  mobile: string
-  tablet: string
-  laptop: string
-  desktop: string
-}
+type Theme = 'light' | 'dark'
+type ColorsKey = keyof Colors
+type ThemedPalette = Record<ColorsKey, string>
 
-const breakPoints = {
-  xlarge: '1200px',
-  large: '1024px',
-  medium: '768px',
-  small: '576px',
-}
-
-export const responsive = {
-  mobile: `(max-width: ${breakPoints.small})`,
-  tablet: `(max-width: ${breakPoints.medium})`,
-  laptop: `(max-width: ${breakPoints.large})`,
-  desktop: `(min-width: ${breakPoints.xlarge})`,
-}
-
-const theme: DefaultTheme = {
+const themeVariableSets: Record<Theme, Colors> = {
   dark: {
     text: '#d2d3d7',
     element: '#202124',
@@ -43,4 +24,21 @@ const theme: DefaultTheme = {
   },
 }
 
-export default theme
+const buildCssVariables = (variables: Colors) => {
+  const keys = Object.keys(variables) as (keyof Colors)[]
+  return keys.reduce((acc, key) => acc.concat(`--${key.replace(/_/g, '-')}: ${variables[key]};`, '\n'), '')
+}
+
+export const themes = {
+  light: buildCssVariables(themeVariableSets.light),
+  dark: buildCssVariables(themeVariableSets.dark),
+}
+
+const cssVar = (name: string) => `var(--${name.replace(/_/g, '-')})`
+
+const variableKeys = Object.keys(themeVariableSets.light) as ColorsKey[]
+
+export const themedPalette: Record<ColorsKey, string> = variableKeys.reduce((acc, current) => {
+  acc[current] = cssVar(current)
+  return acc
+}, {} as ThemedPalette)

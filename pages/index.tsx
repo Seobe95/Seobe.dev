@@ -1,8 +1,12 @@
 import Head from 'next/head'
 import styled from 'styled-components'
-import Header from '../src/components/base/Header'
+import Responsive from '../src/components/common/Responsive'
+import { themedPalette } from '../styles/theme'
 
-const Block = styled.div``
+const Block = styled.div`
+  background: ${themedPalette.bg_page1};
+  color: ${themedPalette.text};
+`
 
 export default function Home() {
   return (
@@ -10,8 +14,9 @@ export default function Home() {
       <Head>
         <title>Seobe.dev</title>
       </Head>
-      <Header />
-      <Block>ㅎㅇ</Block>
+      <Block>
+        <Responsive>ggg</Responsive>
+      </Block>
     </>
   )
 }

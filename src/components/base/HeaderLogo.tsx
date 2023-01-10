@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import localFont from '@next/font/local'
 import Link from 'next/link'
+import { themedPalette } from '../../../styles/theme'
 
 const font = localFont({ src: '../../../public/fonts/BMHANNAPro.ttf' })
 
 const StyledLink = styled(Link)`
-  color: #d2d3d7;
+  color: ${themedPalette.text};
   font-size: 2rem;
 `
 

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import theme from './theme'
+import { themedPalette, themes } from './theme'
 
 const GlobalStyle = createGlobalStyle`
 
@@ -9,38 +9,30 @@ html {
 body {
   padding: 0;
   margin: 0;
+  height : 100%;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
     Helvetica Neue, sans-serif;
+  color : ${themedPalette.text}
 }
 
-/* 
+
 body {
-  --text: ${theme.light.text};
-  --background: ${theme.light.bg_page1}; 
-  transition: 0.125s all ease-in;
+  ${themes.light}
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    --text: ${theme.dark.text};
-    --background: ${theme.dark.bg_page1}; 
+    ${themes.dark}
   }
 }
 
 body[data-theme='light'] {
-  --text: ${theme.light.text};
-  --background: ${theme.light.bg_page1}; 
+  ${themes.light}
 }
 
 body[data-theme='dark'] {
-  --text: ${theme.dark.text};
-  --background: ${theme.dark.bg_page1}; 
+  ${themes.dark}
 }
-
-body {
-  color: var(--text);
-  background: var(--background);
-} */
 
 #root {
   min-height: 100%;

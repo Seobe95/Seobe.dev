@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { themedPalette } from '../../../styles/theme'
 import Responsive from '../common/Responsive'
 import HeaderLogo from './HeaderLogo'
 import HeaderNavigation from './HeaderNavigation'
@@ -7,7 +8,7 @@ import ThemeToggleButton from './ThemeToggleButton'
 export interface HeaderProps {}
 
 const HeaderBlock = styled.header`
-  background: #28292d;
+  background: ${themedPalette.bg_page1};
   height: 4rem;
 `
 
