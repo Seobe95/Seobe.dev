@@ -20,6 +20,10 @@ const ResponsiveBlock = styled.div`
   ${mediaQuery(1056)} {
     width: calc(100% - 2rem);
   }
+  ${mediaQuery(375)} {
+    width: 100%;
+    padding: 1rem;
+  }
 `
 
 const Responsive = ({ children, className }: ResponsiveProps) => {

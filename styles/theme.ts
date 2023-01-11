@@ -3,6 +3,7 @@ export type Colors = {
   element: string
   bg_page1: string
   bg_page2: string
+  hover: string
 }
 
 type Theme = 'light' | 'dark'
@@ -15,12 +16,14 @@ const themeVariableSets: Record<Theme, Colors> = {
     element: '#202124',
     bg_page1: '#080809',
     bg_page2: '#202124',
+    hover: '#4d4d4d',
   },
   light: {
     text: '#4d5156',
     element: '#ffffff',
     bg_page1: '#F8F9FA',
     bg_page2: '#ffffff',
+    hover: '#e9e9e9',
   },
 }
 

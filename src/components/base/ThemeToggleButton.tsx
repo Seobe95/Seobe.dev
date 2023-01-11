@@ -5,26 +5,28 @@ import { themedPalette } from '../../../styles/theme'
 import useThemeToggle from '../../hooks/useThemeToggle'
 
 const IconButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  :hover {
+    background: ${themedPalette.hover};
+  }
 `
 
 const StyledMoonIcon = styled(MoonIcon)`
-  width: 1.5rem;
+  width: 2rem;
   background: none;
-  cursor: pointer;
-  :hover {
-    fill: #e3e3e3;
-  }
 `
 
 const StyledSunIcon = styled(SunIcon)`
-  width: 1.5rem;
+  width: 2rem;
   background: none;
-  cursor: pointer;
-  :hover {
-    fill: pink;
-  }
 `
 
 export default function ThemeToggleButton() {
@@ -32,9 +34,5 @@ export default function ThemeToggleButton() {
 
   const isDark = theme === 'dark'
 
-  return (
-    <>
-      <IconButton onClick={toggle}>{isDark ? <StyledSunIcon /> : <StyledMoonIcon />}</IconButton>
-    </>
-  )
+  return <IconButton onClick={toggle}>{isDark ? <StyledSunIcon /> : <StyledMoonIcon />}</IconButton>
 }

@@ -12,7 +12,8 @@ body {
   height : 100%;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
     Helvetica Neue, sans-serif;
-  color : ${themedPalette.text}
+  color : ${themedPalette.text};
+  background: ${themedPalette.bg_page1};
 }
 
 

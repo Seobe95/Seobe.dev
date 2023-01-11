@@ -10,6 +10,8 @@ export interface HeaderProps {}
 const HeaderBlock = styled.header`
   background: ${themedPalette.bg_page1};
   height: 4rem;
+  position: fixed;
+  width: 100%;
 `
 
 const HeaderInner = styled(Responsive)`

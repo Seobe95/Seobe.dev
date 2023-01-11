@@ -13,7 +13,7 @@ const StyledLink = styled(Link)`
 const HeaderLogo = () => {
   return (
     <StyledLink href={'/'} style={font.style}>
-      Seobe.dev
+      <h1 style={{ fontSize: '2.5rem' }}>Seobe.dev</h1>
     </StyledLink>
   )
 }

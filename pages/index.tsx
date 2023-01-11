@@ -4,8 +4,8 @@ import Responsive from '../src/components/common/Responsive'
 import { themedPalette } from '../styles/theme'
 
 const Block = styled.div`
-  background: ${themedPalette.bg_page1};
   color: ${themedPalette.text};
+  background: ${themedPalette.bg_page1};
 `
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
         <title>Seobe.dev</title>
       </Head>
       <Block>
-        <Responsive>ggg</Responsive>
+        <Responsive>gdgd &nsb; adsf adsf</Responsive>
       </Block>
     </>
   )
