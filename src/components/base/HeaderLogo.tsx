@@ -7,13 +7,17 @@ const font = localFont({ src: '../../../public/fonts/BMHANNAPro.ttf' })
 
 const StyledLink = styled(Link)`
   color: ${themedPalette.text};
-  font-size: 2rem;
+  h1 {
+    padding: none;
+    margin: none;
+    font-size: 2rem;
+  }
 `
 
 const HeaderLogo = () => {
   return (
     <StyledLink href={'/'} style={font.style}>
-      <h1 style={{ fontSize: '2.5rem' }}>Seobe.dev</h1>
+      <h1>Seobe.dev</h1>
     </StyledLink>
   )
 }

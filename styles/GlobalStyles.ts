@@ -1,5 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
 import { themedPalette, themes } from './theme'
+import localFont from '@next/font/local'
+
+const font = localFont({ src: '../public/fonts/RobotoMono-Regular.ttf' })
 
 const GlobalStyle = createGlobalStyle`
 
@@ -48,6 +51,9 @@ a {
   box-sizing: border-box;
 }
 
+code { 
+  ${font.style}
+}
 `
 
 export default GlobalStyle
