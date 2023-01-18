@@ -8,7 +8,6 @@ export function useThemeEffect() {
     (state) => ({ theme: state.userTheme, dispatch: state.setSystemTheme }),
     shallow,
   )
-
   useEffect(() => {
     const storageItem = getStorage('theme')
     if (storageItem) {
@@ -21,7 +20,6 @@ export function useThemeEffect() {
 
   useEffect(() => {
     if (theme !== 'default') {
-      console.log(theme)
       document.body.dataset.theme = theme
     }
   }, [theme])

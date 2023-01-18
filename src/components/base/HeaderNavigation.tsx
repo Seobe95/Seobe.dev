@@ -1,42 +1,55 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-import { mediaQuery } from '../../../styles/media'
+import media, { mediaQuery } from '../../../styles/media'
 import { themedPalette } from '../../../styles/theme'
+import responsive from '../../../styles/responsive'
 
 const HeaderNavigationBlock = styled.nav`
   font-weight: 300;
   font-size: 1.5rem;
   padding-left: 1rem;
-  span {
+  @media ${responsive.mobile} {
+    padding-left: 0.25rem;
+  }
+  ul {
+    padding: 0px;
+    margin: 0px;
+  }
+  li {
     &:first-of-type {
-      border-right: 1px solid #d7d0d0;
-      margin-right: 1rem;
-      padding-right: 1rem;
+      margin-right: 0.5rem;
+      padding-right: 0.5rem;
+      @media ${responsive.mobile} {
+        margin-right: 0.125rem;
+        padding-right: 0.125rem;
+      }
     }
     display: inline;
-  }
-  ${mediaQuery(375)} {
-    padding-left: 0.125rem;
   }
 `
 
 const StyledLink = styled(Link)`
-  padding: 0.25rem;
+  padding: 0px 0.25rem;
   :hover {
     background: ${themedPalette.hover};
-    border-radius: 15%;
+    border-radius: 5%;
+  }
+  @media ${responsive.mobile} {
+    font-size : 1.125rem;
   }
 `
 
 const HeaderNavigation = () => {
   return (
     <HeaderNavigationBlock>
-      <span>
-        <StyledLink href={'/resume'}>Resume</StyledLink>
-      </span>
-      <span>
-        <StyledLink href={'/tags'}>Tag</StyledLink>
-      </span>
+      <ul>
+        <li>
+          <StyledLink href={'/resume'}>Resume</StyledLink>
+        </li>
+        <li>
+          <StyledLink href={'/tags'}>Tag</StyledLink>
+        </li>
+      </ul>
     </HeaderNavigationBlock>
   )
 }

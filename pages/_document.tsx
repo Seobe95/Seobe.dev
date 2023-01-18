@@ -7,8 +7,7 @@ export default function Document() {
       <body>
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-            const cookie = document.cookie.split('=')[1];
+            __html: `const cookie = document.cookie.split('=')[1];
             document.body.dataset.theme = cookie;`,
           }}
         ></script>

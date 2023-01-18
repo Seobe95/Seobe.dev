@@ -19,7 +19,6 @@ body {
   background: ${themedPalette.bg_page1};
 }
 
-
 body {
   ${themes.light}
 }
@@ -30,6 +29,10 @@ body {
   }
 }
 
+#__next {
+  height: 100%;
+}
+
 body[data-theme='light'] {
   ${themes.light}
 }
@@ -38,8 +41,9 @@ body[data-theme='dark'] {
   ${themes.dark}
 }
 
-#root {
-  min-height: 100%;
+h1 {
+  font-size: 2rem;
+  margin: 0.67em 0;
 }
 
 a {

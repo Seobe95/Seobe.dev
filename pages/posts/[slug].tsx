@@ -9,14 +9,12 @@ import { CH } from '@code-hike/mdx/components'
 import theme from 'shiki/themes/dracula.json'
 import { postFilePaths, POST_PATH } from '../../src/lib/mdxUtils'
 import Responsive from '../../src/components/common/Responsive'
+import PostHeader from '../../src/components/post/PostHeader'
+import { FrontMatterTypes } from '../../src/types/type'
 
 interface PostPageProps {
   mdxSource: MDXRemoteSerializeResult
-  frontMatter?: {
-    title: string
-    description: string
-    filePath: string
-  }
+  frontMatter: FrontMatterTypes
 }
 
 const PostPageBlock = styled(Responsive)`
@@ -29,16 +27,18 @@ const PostPageBlock = styled(Responsive)`
 
 export default function PostPage({ frontMatter, mdxSource }: PostPageProps) {
   return (
-    <PostPageBlock>
-      <MDXRemote {...mdxSource} components={{ CH }} />
-    </PostPageBlock>
+    <article>
+      <PostPageBlock>
+        <PostHeader {...frontMatter} />
+        <MDXRemote {...mdxSource} components={{ CH }} />
+      </PostPageBlock>
+    </article>
   )
 }
 
 export const getStaticProps = async ({ params }: { params: { slug: string } }) => {
   const postFilePath = path.join(POST_PATH, `${params.slug}.mdx`)
   const source = fs.readFileSync(postFilePath)
-
   const { content, data } = matter(source)
   const mdxSource = await serialize(content, {
     mdxOptions: {
@@ -58,7 +58,6 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
 
 export const getStaticPaths = async () => {
   const paths = postFilePaths.map((path) => path.replace(/\.mdx?$/, '')).map((slug) => ({ params: { slug } }))
-
   return {
     paths,
     fallback: false,

@@ -1,17 +1,15 @@
 import styled from 'styled-components'
+import Footer from '../base/Footer'
 import Header from '../base/Header'
-import localFont from '@next/font/local'
-
-const font = localFont({ src: '../../../public/fonts/BMHANNAPro.ttf' })
 export interface LayoutProps {
   children: React.ReactNode
 }
 
-const LayoutBlock = styled.main`
-  padding-top: 5rem;
-  .code {
-    font-family: ${font};
-  }
+const LayoutBlock = styled.div`
+  padding-top: 4rem;
+  /* height: auto; */
+  min-height: 100%;
+  padding-bottom: 100px;
 `
 
 export default function Layout({ children }: LayoutProps) {
@@ -19,6 +17,7 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <Header />
       <LayoutBlock>{children}</LayoutBlock>
+      <Footer />
     </>
   )
 }

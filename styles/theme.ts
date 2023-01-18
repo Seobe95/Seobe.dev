@@ -20,7 +20,7 @@ const themeVariableSets: Record<Theme, Colors> = {
   },
   light: {
     text: '#4d5156',
-    element: '#ffffff',
+    element: '#D0D7DE',
     bg_page1: '#F8F9FA',
     bg_page2: '#ffffff',
     hover: '#e9e9e9',

@@ -25,13 +25,16 @@ const Right = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 `
 
 const Header = () => {
   return (
     <HeaderBlock>
       <HeaderInner>
-        <HeaderLogo />
+        <div>
+          <HeaderLogo />
+        </div>
         <Right>
           <ThemeToggleButton />
           <HeaderNavigation />

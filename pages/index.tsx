@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import styled from 'styled-components'
 import Responsive from '../src/components/common/Responsive'
 import { postFilePaths, POST_PATH } from '../src/lib/mdxUtils'
@@ -7,14 +6,12 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import PostList from '../src/components/posts/PostList'
+import { FrontMatterTypes } from '../src/types/type'
 
 interface Props {
   posts: {
     content: string
-    data: {
-      title: string
-      description: string
-    }
+    data: FrontMatterTypes
     filePath: string
   }[]
 }
@@ -25,15 +22,11 @@ const Block = styled(Responsive)`
 `
 
 export default function Home({ posts }: Props) {
+  console.log(posts)
   return (
-    <>
-      <Head>
-        <title>Seobe.dev</title>
-      </Head>
       <Block>
         <PostList posts={posts} />
       </Block>
-    </>
   )
 }
 

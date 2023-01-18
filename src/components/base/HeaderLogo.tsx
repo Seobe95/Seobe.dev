@@ -1,23 +1,22 @@
 import styled from 'styled-components'
-import localFont from '@next/font/local'
 import Link from 'next/link'
 import { themedPalette } from '../../../styles/theme'
-
-const font = localFont({ src: '../../../public/fonts/BMHANNAPro.ttf' })
+import responsive from '../../../styles/responsive'
 
 const StyledLink = styled(Link)`
   color: ${themedPalette.text};
-  h1 {
-    padding: none;
-    margin: none;
-    font-size: 2rem;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  @media ${responsive.mobile} {
+    font-size: 1.25rem;
   }
 `
 
 const HeaderLogo = () => {
   return (
-    <StyledLink href={'/'} style={font.style}>
-      <h1>Seobe.dev</h1>
+    <StyledLink href={'/'}>
+      Seobe.dev
     </StyledLink>
   )
 }
