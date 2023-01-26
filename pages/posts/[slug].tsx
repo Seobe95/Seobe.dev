@@ -12,6 +12,7 @@ import PostHeader from '../../src/components/post/PostHeader'
 import { FrontMatterTypes } from '../../src/types/type'
 import PostContents from '../../src/components/post/PostContents'
 import SEO from '../../src/components/base/SEO'
+import { useRouter } from 'next/router'
 
 interface PostPageProps {
   mdxSource: MDXRemoteSerializeResult
@@ -27,9 +28,11 @@ const PostPageBlock = styled(Responsive)`
 `
 
 export default function PostPage({ frontMatter, mdxSource }: PostPageProps) {
+  const {description, title, tags, thumbnail} = frontMatter
+  const router = useRouter();
   return (
     <>
-      <SEO title={frontMatter.title} tags={frontMatter.tags}/>
+      <SEO title={title} tags={tags} description={description} image={thumbnail} url={router.asPath} />
       <article>
         <PostPageBlock>
           <PostHeader {...frontMatter} />
