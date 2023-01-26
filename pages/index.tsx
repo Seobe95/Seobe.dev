@@ -7,6 +7,7 @@ import path from 'path'
 import matter from 'gray-matter'
 import PostList from '../src/components/posts/PostList'
 import { FrontMatterTypes } from '../src/types/type'
+import SEO from '../src/components/base/SEO'
 
 interface Props {
   posts: {
@@ -22,11 +23,13 @@ const Block = styled(Responsive)`
 `
 
 export default function Home({ posts }: Props) {
-  console.log(posts)
   return (
+    <>
+      <SEO />
       <Block>
         <PostList posts={posts} />
       </Block>
+    </>
   )
 }
 

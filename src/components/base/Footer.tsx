@@ -11,14 +11,18 @@ const FooterBlock = styled.footer`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100px;
   position: relative;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  height: 6rem;
   transform: translateY(-100%);
-  a {
-    &:first-of-type {
-      margin-right: 0.5rem;
-      padding-right: 0.5rem;
-    }
+  a:first-of-type {
+    margin-right: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  p {
+    padding: none;
+    margin: none;
   }
 `
 
@@ -44,13 +48,13 @@ export default function Footer () {
   const isDark = theme === 'dark'
   return (
     <FooterBlock>
-        <div>
-          <nav>
-            <Link href={'https://github.com/Seobe95'}>{isDark ? <StyledGithubWhite /> : <StyledGithubDark />}</Link>
-            <Link href={'mailto:seobe95@gmail.com'}>{isDark ? <StyledMailWhite /> : <StyledMailDark />}</Link>
-          </nav>
-        </div>
-        <p>2023 @Seobe.dev</p>
+      <nav>
+        <Link href={'https://github.com/Seobe95'} target="_blank" title="github">
+          {isDark ? <StyledGithubWhite /> : <StyledGithubDark />}
+        </Link>
+        <Link href={'mailto:seobe95@gmail.com'} title="email">{isDark ? <StyledMailWhite /> : <StyledMailDark />}</Link>
+      </nav>
+      <p>2023 @Seobe.dev</p>
     </FooterBlock>
   )
 }

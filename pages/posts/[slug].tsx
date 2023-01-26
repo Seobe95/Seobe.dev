@@ -1,16 +1,17 @@
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import path from 'path'
 import fs from 'fs'
 import styled from 'styled-components'
 import matter from 'gray-matter'
 import { serialize } from 'next-mdx-remote/serialize'
 import { remarkCodeHike } from '@code-hike/mdx'
-import { CH } from '@code-hike/mdx/components'
 import theme from 'shiki/themes/dracula.json'
 import { postFilePaths, POST_PATH } from '../../src/lib/mdxUtils'
 import Responsive from '../../src/components/common/Responsive'
 import PostHeader from '../../src/components/post/PostHeader'
 import { FrontMatterTypes } from '../../src/types/type'
+import PostContents from '../../src/components/post/PostContents'
+import SEO from '../../src/components/base/SEO'
 
 interface PostPageProps {
   mdxSource: MDXRemoteSerializeResult
@@ -27,12 +28,16 @@ const PostPageBlock = styled(Responsive)`
 
 export default function PostPage({ frontMatter, mdxSource }: PostPageProps) {
   return (
-    <article>
-      <PostPageBlock>
-        <PostHeader {...frontMatter} />
-        <MDXRemote {...mdxSource} components={{ CH }} />
-      </PostPageBlock>
-    </article>
+    <>
+      <SEO title={frontMatter.title} tags={frontMatter.tags}/>
+      <article>
+        <PostPageBlock>
+          <PostHeader {...frontMatter} />
+          {/* 본문 내용 */}
+          <PostContents mdxSource={mdxSource} />
+        </PostPageBlock>
+      </article>
+    </>
   )
 }
 

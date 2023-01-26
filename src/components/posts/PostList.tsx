@@ -4,6 +4,11 @@ import styled from 'styled-components'
 import { themedPalette } from '../../../styles/theme'
 import { FrontMatterTypes } from '../../types/type'
 import Responsive from '../common/Responsive'
+import response from '../../../styles/responsive'
+
+/** 블로그 포스트 리스트 UI를 담당하는 컴포넌트입니다. - PostList
+ *  각 포스트에 대한 UI도 포함되어 있습니다. - PostItem
+ */
 
 interface PostListProps {
   posts: {
@@ -27,19 +32,24 @@ const PostBlock = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem;
   div:first-child {
     margin-right: 2rem;
   }
   h2 {
     margin: 0px;
+    font-size: 1.5rem;
   }
   h3 {
     margin: 0px;
     margin-top: 2rem;
+    font-size: 1.25rem;
+    font-weight: 300;
   }
   h4 {
     margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 200;
   }
 
   span {
@@ -53,26 +63,40 @@ const PostBlock = styled.div`
   }
 `
 
+const ImageContainer = styled.div`
+  position: relative;
+  display: block;
+  width: 120px;
+  height: 120px;
+
+  @media ${response.mobile} {
+    max-width: 90px;
+    min-width: 90px;
+  }
+`
+
 const Post = ({
   filePath,
   link,
   title,
   description,
   date,
+  thumbnail,
 }: {
   filePath: string
   link: string
   title: string
   description: string
   date: string
+  thumbnail: string
 }) => {
   return (
     <article key={filePath}>
       <Link as={link} href={`/posts/[slug]`}>
         <PostBlock>
-          <div>
-            <Image src={'/thumbnail/test.png'} alt={`${title}의 대표이미지`} width={150} height={150}/>
-          </div>
+          <ImageContainer>
+            <Image src={thumbnail} alt={`${title}의 대표이미지`} fill sizes={'120px'} priority/>
+          </ImageContainer>
           <div>
             <h2>{title}</h2>
             <h4>{date}</h4>
@@ -98,6 +122,7 @@ export default function PostList({ posts }: PostListProps) {
               link={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
               title={title}
               key={post.filePath}
+              thumbnail={post.data.thumbnail}
               date={post.data.date}
             />
           )

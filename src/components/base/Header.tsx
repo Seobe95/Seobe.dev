@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { themedPalette } from '../../../styles/theme'
 import Responsive from '../common/Responsive'
 import HeaderLogo from './HeaderLogo'
-import HeaderNavigation from './HeaderNavigation'
+// import HeaderNavigation from './HeaderNavigation'
 import ThemeToggleButton from './ThemeToggleButton'
 
 export interface HeaderProps {}
@@ -12,6 +12,7 @@ const HeaderBlock = styled.header`
   height: 4rem;
   position: fixed;
   width: 100%;
+  z-index: 10;
 `
 
 const HeaderInner = styled(Responsive)`
@@ -32,12 +33,12 @@ const Header = () => {
   return (
     <HeaderBlock>
       <HeaderInner>
-        <div>
+        {/* <div> */}
           <HeaderLogo />
-        </div>
+        {/* </div> */}
         <Right>
           <ThemeToggleButton />
-          <HeaderNavigation />
+          {/* <HeaderNavigation /> */}
         </Right>
       </HeaderInner>
     </HeaderBlock>

@@ -42,8 +42,7 @@ body[data-theme='dark'] {
 }
 
 h1 {
-  font-size: 2rem;
-  margin: 0.67em 0;
+  font-size: 1.5rem;
 }
 
 a {

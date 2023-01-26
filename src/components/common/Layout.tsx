@@ -5,11 +5,10 @@ export interface LayoutProps {
   children: React.ReactNode
 }
 
-const LayoutBlock = styled.div`
+const LayoutBlock = styled.main`
   padding-top: 4rem;
-  /* height: auto; */
   min-height: 100%;
-  padding-bottom: 100px;
+  padding-bottom: 8rem;
 `
 
 export default function Layout({ children }: LayoutProps) {

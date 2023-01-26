@@ -50,5 +50,5 @@ export default function ThemeToggleButton() {
 
   const isDark = theme === 'dark'
 
-  return <IconButton onClick={toggle}>{isDark ? <StyledSunIcon /> : <StyledMoonIcon />}</IconButton>
+  return <IconButton onClick={toggle} title="화면모드 전환 버튼">{isDark ? <StyledSunIcon /> : <StyledMoonIcon />}</IconButton>
 }

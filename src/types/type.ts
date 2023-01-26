@@ -3,4 +3,5 @@ export interface FrontMatterTypes {
   description: string
   tags: string[]
   date: string
+  thumbnail: string
 }

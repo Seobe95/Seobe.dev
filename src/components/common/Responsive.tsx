@@ -8,16 +8,10 @@ export interface ResponsiveProps {
 }
 
 const ResponsiveBlock = styled.div`
-  width: 1200px;
+  width: 768px;
   margin-left: auto;
   margin-right: auto;
-  ${mediaQuery(1919)} {
-    width: 1200px;
-  }
-  ${mediaQuery(1440)} {
-    width: 1024px;
-  }
-  ${mediaQuery(1056)} {
+  ${mediaQuery(768)} {
     width: calc(100% - 2rem);
   }
   ${mediaQuery(375)} {

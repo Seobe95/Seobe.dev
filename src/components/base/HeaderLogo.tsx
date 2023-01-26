@@ -5,7 +5,7 @@ import responsive from '../../../styles/responsive'
 
 const StyledLink = styled(Link)`
   color: ${themedPalette.text};
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 800;
   letter-spacing: 1px;
   @media ${responsive.mobile} {

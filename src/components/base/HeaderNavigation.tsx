@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-import media, { mediaQuery } from '../../../styles/media'
 import { themedPalette } from '../../../styles/theme'
 import responsive from '../../../styles/responsive'
 
