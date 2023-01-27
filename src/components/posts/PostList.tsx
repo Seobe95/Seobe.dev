@@ -17,7 +17,7 @@ interface PostListProps {
   }[]
 }
 
-const PostListBlock = styled(Responsive)`
+const PostListBlock = styled.div`
   margin-top: 2rem;
   article:first-child {
     margin-bottom: 2rem;
@@ -32,7 +32,7 @@ const PostBlock = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 0px;
   div:first-child {
     margin-right: 2rem;
   }
@@ -59,6 +59,7 @@ const PostBlock = styled.div`
   }
 
   @media ${response.mobile} {
+    padding : 0px;
     h2 {
       margin: 0px;
       font-size: 1.125rem;
