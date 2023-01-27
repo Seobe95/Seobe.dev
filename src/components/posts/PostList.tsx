@@ -58,6 +58,24 @@ const PostBlock = styled.div`
     align-items: center;
   }
 
+  @media ${response.mobile} {
+    h2 {
+      margin: 0px;
+      font-size: 1.125rem;
+    }
+    h3 {
+      margin: 0px;
+      margin-top: 0.75rem;
+      font-size: 1rem;
+      font-weight: 300;
+    }
+    h4 {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 200;
+    }
+  }
+
   :hover {
     background-color: ${themedPalette.element};
   }
@@ -66,12 +84,12 @@ const PostBlock = styled.div`
 const ImageContainer = styled.div`
   position: relative;
   display: block;
-  width: 120px;
-  height: 120px;
+  width : 120px;
+  height : 90px;
 
   @media ${response.mobile} {
-    max-width: 90px;
-    min-width: 90px;
+    max-width: 100px;
+    min-width: 100px;
   }
 `
 
@@ -95,7 +113,7 @@ const Post = ({
       <Link as={link} href={`/posts/[slug]`}>
         <PostBlock>
           <ImageContainer>
-            <Image src={thumbnail} alt={`${title}의 대표이미지`} fill sizes={'120px'} priority/>
+            <Image src={thumbnail} alt={`${title}의 대표이미지`} fill priority/>
           </ImageContainer>
           <div>
             <h2>{title}</h2>
