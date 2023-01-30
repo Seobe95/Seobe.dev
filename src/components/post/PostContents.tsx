@@ -1,6 +1,8 @@
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import styled from "styled-components";
 import { themedPalette } from "../../../styles/theme";
+import CustomH2 from "../mdx/CustomH2";
+import CustomImage from "../mdx/CustomImage";
 
 interface PostContentsProps {
     mdxSource: MDXRemoteSerializeResult
@@ -39,7 +41,7 @@ const PostContentsBlock = styled.section`
 export default function PostContents({mdxSource}: PostContentsProps) {
   return (
     <PostContentsBlock>
-      <MDXRemote {...mdxSource}/>
+      <MDXRemote {...mdxSource} components={{img: CustomImage, h2: CustomH2}}/>
     </PostContentsBlock>
   )
 }
