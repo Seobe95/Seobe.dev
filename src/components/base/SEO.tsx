@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { metaDefaultKeywords } from '../../constants/metaKeywords'
 
 interface SEOProps {
   title?: string
@@ -8,16 +9,15 @@ interface SEOProps {
   image?: string
 }
 
-function tagsToString(tags: string[] | undefined): string {
+function metaKeyowrdsHandler(tags: string[] | undefined) {
   if (Array.isArray(tags)) {
-    const string = [...tags, 'seobe', 'dev', 'developer', 'blog'].join(',')
-    return string
+    return [...tags, ...metaDefaultKeywords].join(',')
   }
-  return 'seobe,dev,developer,blog'
+  return metaDefaultKeywords.join(',')
 }
 
 export default function SEO({ description, image, title, url, tags }: SEOProps) {
-  const keywordsContent = tagsToString(tags)
+  const keywordsContent = metaKeyowrdsHandler(tags)
   const protocol = process.env.NEXT_PUBLIC_PROTOCOL || 'http'
   const host = process.env.NEXT_PUBLIC_HOST || 'localhost'
   const port = process.env.NEXT_PUBLIC_PORT || '3000'
