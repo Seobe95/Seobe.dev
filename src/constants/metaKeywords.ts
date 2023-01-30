@@ -1,0 +1,1 @@
+export const metaDefaultKeywords = ['seobe', 'dev', 'developer', 'blog']

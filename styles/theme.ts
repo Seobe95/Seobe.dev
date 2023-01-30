@@ -46,5 +46,6 @@ const variableKeys = Object.keys(themeVariableSets.light) as ColorsKey[]
 
 export const themedPalette: Record<ColorsKey, string> = variableKeys.reduce((acc, current) => {
   acc[current] = cssVar(current)
+  console.log(acc)
   return acc
 }, {} as ThemedPalette)
