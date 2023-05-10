@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import Loading from './loading'
 import Head from 'next/head'
 import Script from 'next/script'
-import { GA_TRACKING_ID } from '../src/lib/gtag'
+import * as gtag from '../src/lib/gtag'
 
 export default function App({ Component, pageProps }: AppProps) {
   useThemeEffect()
@@ -18,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const handleStart = (url: string) => {
       setIsLoading(true)
+      gtag.pageView(url)
     }
 
     const handleStop = () => {
@@ -49,13 +50,16 @@ export default function App({ Component, pageProps }: AppProps) {
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
 
-              gtag('config', '${GA_TRACKING_ID}', {
+              gtag('config', '${gtag.GA_TRACKING_ID}', {
                 page_path: window.location.pathname,
               });
             `,
           }}
         />
-        <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+        />
       </Head>
     </>
   )
