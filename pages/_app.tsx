@@ -6,6 +6,9 @@ import '@code-hike/mdx/dist/index.css'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Loading from './loading'
+import Head from 'next/head'
+import Script from 'next/script'
+import { GA_TRACKING_ID } from '../src/lib/gtag'
 
 export default function App({ Component, pageProps }: AppProps) {
   useThemeEffect()
@@ -35,9 +38,25 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <GlobalStyle />
       <Layout>
-        <Loading isLoading={isLoading}/>
+        <Loading isLoading={isLoading} />
         <Component {...pageProps} />
       </Layout>
+      <Head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
+        <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+      </Head>
     </>
   )
 }
