@@ -10,9 +10,10 @@ import { postFilePaths, POST_PATH } from '../../src/lib/mdxUtils'
 import Responsive from '../../src/components/common/Responsive'
 import PostHeader from '../../src/components/post/PostHeader'
 import { FrontMatterTypes } from '../../src/types/type'
-import PostContents from '../../src/components/post/PostContents'
+// import PostContents from '../../src/components/post/PostContents'
 import SEO from '../../src/components/base/SEO'
 import { useRouter } from 'next/router'
+import { Suspense, lazy } from 'react'
 
 interface PostPageProps {
   mdxSource: MDXRemoteSerializeResult
@@ -27,9 +28,11 @@ const PostPageBlock = styled(Responsive)`
   }
 `
 
+const PostContents = lazy(() => import('../../src/components/post/PostContents'))
+
 export default function PostPage({ frontMatter, mdxSource }: PostPageProps) {
-  const {description, title, tags, thumbnail} = frontMatter
-  const router = useRouter();
+  const { description, title, tags, thumbnail } = frontMatter
+  const router = useRouter()
   return (
     <>
       <SEO title={title} tags={tags} description={description} image={thumbnail} url={router.asPath} />
@@ -37,7 +40,9 @@ export default function PostPage({ frontMatter, mdxSource }: PostPageProps) {
         <PostPageBlock>
           <PostHeader {...frontMatter} />
           {/* 본문 내용 */}
-          <PostContents mdxSource={mdxSource} />
+          <Suspense fallback={<div>loading..</div>}>
+            <PostContents mdxSource={mdxSource} />
+          </Suspense>
         </PostPageBlock>
       </article>
     </>

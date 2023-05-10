@@ -33,9 +33,9 @@ const Header = () => {
   return (
     <HeaderBlock>
       <HeaderInner>
-        {/* <div> */}
+        <div>
           <HeaderLogo />
-        {/* </div> */}
+        </div>
         <Right>
           <ThemeToggleButton />
           {/* <HeaderNavigation /> */}

@@ -3,19 +3,12 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { themedPalette } from '../../../styles/theme'
 import { FrontMatterTypes } from '../../types/type'
-import Responsive from '../common/Responsive'
 import response from '../../../styles/responsive'
+import { HomePageProps } from '../../../pages'
 
 /** 블로그 포스트 리스트 UI를 담당하는 컴포넌트입니다. - PostList
  *  각 포스트에 대한 UI도 포함되어 있습니다. - PostItem
  */
-
-interface PostListProps {
-  posts: {
-    data: FrontMatterTypes
-    filePath: string
-  }[]
-}
 
 const PostListBlock = styled.div`
   margin-top: 2rem;
@@ -31,8 +24,9 @@ const PostListBlock = styled.div`
 const PostBlock = styled.div`
   display: flex;
   flex-direction: row;
+  background: ${themedPalette.post_card};
   align-items: center;
-  padding: 1rem 0px;
+  padding: 1rem 1rem;
   div:first-child {
     margin-right: 2rem;
   }
@@ -42,14 +36,15 @@ const PostBlock = styled.div`
   }
   h3 {
     margin: 0px;
-    margin-top: 2rem;
+    margin-top: 0.25rem;
     font-size: 1.25rem;
     font-weight: 300;
   }
   h4 {
-    margin-top: 0.5rem;
+    /* margin-top: 0.5rem; */
     font-size: 1rem;
     font-weight: 200;
+    margin-bottom: 0;
   }
 
   span {
@@ -59,21 +54,22 @@ const PostBlock = styled.div`
   }
 
   @media ${response.mobile} {
-    padding : 0px;
+    padding: 0.25px;
     h2 {
       margin: 0px;
       font-size: 1.125rem;
     }
     h3 {
       margin: 0px;
-      margin-top: 0.75rem;
+      /* margin-bottom: 0.5rem; */
       font-size: 1rem;
       font-weight: 300;
     }
     h4 {
-      margin-top: 0.5rem;
+      /* margin-top: 0.5rem; */
       font-size: 0.875rem;
       font-weight: 200;
+      padding: 0;
     }
   }
 
@@ -82,67 +78,86 @@ const PostBlock = styled.div`
   }
 `
 
-const ImageContainer = styled.div`
-  position: relative;
-  display: block;
-  width : 120px;
-  height : 90px;
+const TitleBox = styled.div`
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
+
+const ImageContainer = styled(Image)`
+  min-width: 100px;
+  min-height: 90px;
+  margin-right: 2rem;
+  max-width: 140px;
+  min-height: 90px;
 
   @media ${response.mobile} {
-    max-width: 100px;
-    min-width: 100px;
+    margin-right: 1rem;
   }
 `
 
 const Post = ({
   filePath,
   link,
-  title,
-  description,
-  date,
-  thumbnail,
+  data,
+  imageProps,
 }: {
-  filePath: string
   link: string
-  title: string
-  description: string
-  date: string
-  thumbnail: string
+  data: FrontMatterTypes
+  filePath: string
+  imageProps: {
+    img: {
+      src: string
+      type: string
+      height: number
+      width: number
+    }
+    blurDataURL: string
+  }
 }) => {
+  const { date, description, title } = data
   return (
     <article key={filePath}>
-      <Link as={link} href={`/posts/[slug]`}>
+      <Link as={link} href={`/posts/[slug]`} shallow>
         <PostBlock>
-          <ImageContainer>
-            <Image src={thumbnail} alt={`${title}의 대표이미지`} fill priority/>
-          </ImageContainer>
-          <div>
-            <h2>{title}</h2>
-            <h4>{date}</h4>
-            <h3>{description}</h3>
-          </div>
+          <ImageContainer
+            alt={`${title}의 대표이미지`}
+            {...imageProps.img}
+            style={{ width: 'auto', height: 'auto' }}
+            blurDataURL={imageProps.blurDataURL}
+            placeholder="blur"
+            priority
+          />
+          <TitleBox>
+            <div>
+              <h2>{title}</h2>
+              <h3>{description}</h3>
+            </div>
+            <div>
+              <h4>{date}</h4>
+            </div>
+          </TitleBox>
         </PostBlock>
       </Link>
     </article>
   )
 }
 
-export default function PostList({ posts }: PostListProps) {
+export default function PostList({ posts }: HomePageProps) {
   return (
     <section>
       <h1>최근 작성한 글</h1>
       <PostListBlock>
         {posts.map((post) => {
-          const { title, description } = post.data
+          const filePath = post.filePath
           return (
             <Post
-              description={description}
-              filePath={post.filePath}
-              link={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
-              title={title}
-              key={post.filePath}
-              thumbnail={post.data.thumbnail}
-              date={post.data.date}
+              filePath={filePath}
+              link={`/posts/${filePath.replace(/\.mdx?$/, '')}`}
+              key={filePath}
+              data={post.data}
+              imageProps={post.imageProps}
             />
           )
         })}

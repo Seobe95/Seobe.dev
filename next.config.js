@@ -1,16 +1,6 @@
-// const { remarkCodeHike } = require('@code-hike/mdx')
-// const theme = require('shiki/themes/dracula.json')
-
-// const withMDX = require('@next/mdx')({
-//   extension: /\.mdx?$/,
-//   options: {
-//     remarkPlugins: [],
-//     rehypePlugins: [],
-//     providerImportSource: '@mdx-js/react',
-//   },
-// })
-
 /** @type {import('next').NextConfig} */
+
+const {withPlaiceholder} = require('@plaiceholder/next')
 
 const nextConfig = {
   reactStrictMode: true,
@@ -28,4 +18,4 @@ const nextConfig = {
   output: 'standalone',
 }
 
-module.exports = nextConfig
+module.exports = withPlaiceholder(nextConfig)

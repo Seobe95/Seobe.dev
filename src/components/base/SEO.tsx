@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import { metaDefaultKeywords } from '../../constants/metaKeywords'
+import { GA_TRACKING_ID } from '../../lib/gtag'
+import Script from 'next/script'
 
 interface SEOProps {
   title?: string
@@ -36,6 +38,20 @@ export default function SEO({ description, image, title, url, tags }: SEOProps) 
       <meta property="og:image" content={image ? `${baseUrl}${image}` : `${baseUrl}/image.png`} />
       <meta property="og:image:width" content="800" />
       <meta property="og:image:height" content="400" />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+        }}
+      />
+      <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
     </Head>
   )
 }

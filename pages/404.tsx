@@ -14,6 +14,7 @@ const ErrorBlock = styled(Responsive)`
 export default function Custom404() {
     const theme = useTheme()
     const isDark = theme === 'dark'
+    
     return (
       <ErrorBlock>
         {isDark ? <Error404Dark alt="404 에러 이미지" /> : <Error404Light alt="404 에러 이미지" />}

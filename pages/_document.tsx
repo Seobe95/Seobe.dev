@@ -1,10 +1,18 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
+import GlobalStyle from '../styles/GlobalStyles'
+import { ServerStyleSheet } from 'styled-components'
+import { ReactElement } from 'react'
 
-export default function Document() {
+interface DocumentProps {
+  styles: ReactElement
+}
+export default function MyDocument(): ReactElement {
   return (
     <Html lang="ko">
       <Head>
+        {/* <link rel="stylesheet" href="/styles.css" /> */}
       </Head>
+      <GlobalStyle />
       <body>
         <script
           dangerouslySetInnerHTML={{
@@ -17,4 +25,29 @@ export default function Document() {
       </body>
     </Html>
   )
+}
+
+MyDocument.getInitialProps = async (ctx: DocumentContext) => {
+  const sheet = new ServerStyleSheet()
+  const originalRenderPage = ctx.renderPage
+
+  try {
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+      })
+
+    const initialProps = await Document.getInitialProps(ctx)
+    return {
+      ...initialProps,
+      styles: (
+        <>
+          {initialProps.styles}
+          {sheet.getStyleElement()}
+        </>
+      ),
+    }
+  } finally {
+    sheet.seal()
+  }
 }
