@@ -1,14 +1,16 @@
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import styled from "styled-components";
-import { themedPalette } from "../../../styles/theme";
-import CustomH2 from "../mdx/CustomH2";
-import CustomImage from "../mdx/CustomImage";
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import styled from 'styled-components'
+import { themedPalette } from '../../../styles/theme'
+import CustomH2 from '../mdx/CustomH2'
+import CustomImage from '../mdx/CustomImage'
+import {CH} from '@code-hike/mdx/components'
 
 interface PostContentsProps {
-    mdxSource: MDXRemoteSerializeResult
+  mdxSource: MDXRemoteSerializeResult
 }
 
 const PostContentsBlock = styled.section`
+
   h2 {
     font-weight: 800;
     font-size: 1.5rem;
@@ -23,6 +25,7 @@ const PostContentsBlock = styled.section`
     font-size: 1rem;
     word-break: keep-all;
     font-weight: 400;
+    line-height: 1.75;
   }
 
   strong {
@@ -37,18 +40,38 @@ const PostContentsBlock = styled.section`
     width: 100%;
   }
 
+  li {
+    font-size: 1rem;
+    margin-bottom: 7px;
+  }
+
+  li:last-child { 
+    margin-bottom: 0;
+  }
+
   a {
     color: ${themedPalette.hyperlink_color};
     :hover {
       color: #00bfff;
     }
   }
+
+  blockquote {
+    background: ${themedPalette.bg_page2};
+    margin: 0;
+    padding : 16px 32px;
+    border-radius: 8px;
+    margin: 1rem 2.5rem;
+    @media (max-width: 425px) {
+      padding: 8px 16px;
+    }
+  }
 `
 
-export default function PostContents({mdxSource}: PostContentsProps) {
+export default function PostContents({ mdxSource }: PostContentsProps) {
   return (
     <PostContentsBlock>
-      <MDXRemote {...mdxSource} components={{img: CustomImage, h2: CustomH2}}/>
+      <MDXRemote {...mdxSource} components={{ img: CustomImage, h2: CustomH2, CH: CH }} />
     </PostContentsBlock>
   )
 }
