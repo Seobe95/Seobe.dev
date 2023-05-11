@@ -13,6 +13,10 @@ const HeaderBlock = styled.header`
   position: fixed;
   width: 100%;
   z-index: 10;
+
+  @media (max-width: 425px) {
+    height:  3rem
+  }
 `
 
 const HeaderInner = styled(Responsive)`
@@ -20,6 +24,11 @@ const HeaderInner = styled(Responsive)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 16px 0;
+
+  @media (max-width: 425px) {
+    padding: 8px 0;
+  }
 `
 
 const Right = styled.div`

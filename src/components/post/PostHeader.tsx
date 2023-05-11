@@ -9,6 +9,7 @@ const PostHeaderBlock = styled.section`
 
   h1 {
     font-size: 2rem;
+    margin: 8px 0;
   }
 `
 

@@ -13,10 +13,10 @@ const ResponsiveBlock = styled.div`
   margin-right: auto;
   ${mediaQuery(768)} {
     width: calc(100% - 2rem);
+    padding: 0.5rem 1rem;
   }
-  ${mediaQuery(375)} {
+  ${mediaQuery(425)} {
     width: 100%;
-    padding: 1rem;
   }
 `
 

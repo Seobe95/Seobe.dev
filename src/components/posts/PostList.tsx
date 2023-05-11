@@ -12,6 +12,7 @@ import { HomePageProps } from '../../../pages'
 
 const PostListBlock = styled.div`
   margin-top: 2rem;
+
   article:first-child {
     margin-bottom: 2rem;
   }
@@ -27,6 +28,8 @@ const PostBlock = styled.div`
   background: ${themedPalette.post_card};
   align-items: center;
   padding: 1rem 1rem;
+  border-radius: 8px;
+
   div:first-child {
     margin-right: 2rem;
   }
