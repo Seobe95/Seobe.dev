@@ -11,6 +11,7 @@ export default function MyDocument(): ReactElement {
     <Html lang="ko">
       <Head>
         {/* <link rel="stylesheet" href="/styles.css" /> */}
+        <meta name="google-site-verification" content="IbBacN3W5LegV-0WiyvBl2hkhESqmHXxb9B1Ar39qTw" />
       </Head>
       <GlobalStyle />
       <body>
