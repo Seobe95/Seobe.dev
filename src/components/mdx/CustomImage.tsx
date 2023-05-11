@@ -23,7 +23,7 @@ export default function CustomImage(props: any) {
 
   useEffect(() => {
     const handleResize = () => {
-      const heightRatio = 0.667 // 이미지의 가로세로 비율 (512 / 768)
+      const heightRatio = 0.523 // 이미지의 가로세로 비율 (512 / 768)
       const windowHeight = window.innerHeight
       const maxImageHeight = windowHeight * 0.8 // 이미지의 최대 높이 (뷰포트 높이의 80%)
       const imageWidth = Math.min(768, window.innerWidth)
@@ -42,7 +42,7 @@ export default function CustomImage(props: any) {
       alt={alt}
       title={title}
       width={768}
-      height={512}
+      height={402}
       style={{ height: `${height}px` }}
       priority
     />
