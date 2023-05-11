@@ -5,8 +5,8 @@ import useThemeStore from './useThemeStore'
 
 export default function useThemeToggle() {
   const { setDarkMode, setLightMode } = useThemeStore((state) => ({
-    setLightMode: state.enableLightMode,
-    setDarkMode: state.enableDarkMode,
+    setLightMode: state.setLightMode,
+    setDarkMode: state.setDarkMode,
   }), shallow)
   const theme = useTheme()
   const save = (value: 'light' | 'dark') => {

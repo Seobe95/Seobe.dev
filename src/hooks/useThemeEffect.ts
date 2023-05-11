@@ -1,12 +1,10 @@
 import useThemeStore from './useThemeStore'
-import shallow from 'zustand/shallow'
 import { useEffect } from 'react'
 import { getStorage } from '../lib/storage'
 
 export function useThemeEffect() {
   const { theme, dispatch } = useThemeStore(
     (state) => ({ theme: state.userTheme, dispatch: state.setSystemTheme }),
-    shallow,
   )
   useEffect(() => {
     const storageItem = getStorage('theme')
