@@ -10,31 +10,38 @@ interface PostContentsProps {
 
 const PostContentsBlock = styled.section`
   h2 {
-    font-weight: 700;
+    font-weight: 800;
     font-size: 1.5rem;
   }
 
   h3 {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.25rem;
   }
 
   p {
     font-size: 1rem;
     word-break: keep-all;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   strong {
     background: ${themedPalette.element};
     color: ${themedPalette.strong_font_color};
-    padding : 1px 5px;
+    padding: 1px 5px;
     border-radius: 5px;
-    font-weight: 300;
+    font-weight: 500;
   }
 
   img {
-    width : 100%;
+    width: 100%;
+  }
+
+  a {
+    color: ${themedPalette.hyperlink_color};
+    :hover {
+      color: #00bfff;
+    }
   }
 `
 

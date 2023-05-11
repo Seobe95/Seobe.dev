@@ -6,6 +6,8 @@ export type Colors = {
   hover: string
   strong_font_color: string
   post_card: string
+  hyperlink_color: string
+  hyperlink_hover: string
 }
 
 type Theme = 'light' | 'dark'
@@ -20,7 +22,9 @@ const themeVariableSets: Record<Theme, Colors> = {
     bg_page2: '#202124',
     post_card: '#171717',
     hover: '#4d4d4d',
-    strong_font_color: '#eb5757',
+    strong_font_color: '#ffffff',
+    hyperlink_color: '#87ceeb',
+    hyperlink_hover: "#00bfff",
   },
   light: {
     text: '#4d5156',
@@ -29,7 +33,9 @@ const themeVariableSets: Record<Theme, Colors> = {
     bg_page2: '#ffffff',
     post_card: '#ffffff',
     hover: '#e9e9e9',
-    strong_font_color: '#eb5757',
+    strong_font_color: '#333333',
+    hyperlink_color: '#4682B4',
+    hyperlink_hover: "#6a5acd",
   },
 }
 
