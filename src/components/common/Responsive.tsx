@@ -25,3 +25,4 @@ const Responsive = ({ children, className }: ResponsiveProps) => {
 }
 
 export default Responsive
+
