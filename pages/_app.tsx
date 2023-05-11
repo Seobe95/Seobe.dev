@@ -5,7 +5,6 @@ import { useThemeEffect } from '../src/hooks/useThemeEffect'
 import '@code-hike/mdx/dist/index.css'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import Loading from './loading'
 import Head from 'next/head'
 import Script from 'next/script'
 import * as gtag from '../src/lib/gtag'
@@ -39,7 +38,6 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <GlobalStyle />
       <Layout>
-        <Loading isLoading={isLoading} />
         <Component {...pageProps} />
       </Layout>
       <Head>
