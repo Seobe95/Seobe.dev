@@ -1,8 +1,7 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import styled from 'styled-components'
 import { themedPalette } from '../../../styles/theme'
-import CustomH2 from '../mdx/CustomH2'
-import CustomImage from '../mdx/CustomImage'
+import {CustomH2, CustomFigure, CustomImage} from '../mdx/index'
 import {CH} from '@code-hike/mdx/components'
 
 interface PostContentsProps {
@@ -66,12 +65,22 @@ const PostContentsBlock = styled.section`
       padding: 8px 16px;
     }
   }
+
+  figure {
+    margin: 0;
+  }
+
+  figcaption {
+    text-align: center;
+    font-size: 0.75rem;
+    font-style: italic;
+  }
 `
 
 export default function PostContents({ mdxSource }: PostContentsProps) {
   return (
     <PostContentsBlock>
-      <MDXRemote {...mdxSource} components={{ img: CustomImage, h2: CustomH2, CH: CH }} />
+      <MDXRemote {...mdxSource} components={{ img: CustomImage, h2: CustomH2, CH: CH, figure: CustomFigure }} />
     </PostContentsBlock>
   )
 }
