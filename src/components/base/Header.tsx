@@ -24,10 +24,14 @@ const HeaderInner = styled(Responsive)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 0;
+  padding: 0px;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
 
   @media (max-width: 425px) {
-    padding: 8px 0;
+    padding: 8px 16px;
   }
 `
 

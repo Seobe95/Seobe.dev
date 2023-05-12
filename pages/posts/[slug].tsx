@@ -40,9 +40,7 @@ export default function PostPage({ frontMatter, mdxSource }: PostPageProps) {
         <PostPageBlock>
           <PostHeader {...frontMatter} />
           {/* 본문 내용 */}
-          <Suspense fallback={<div>loading..</div>}>
             <PostContents mdxSource={mdxSource} />
-          </Suspense>
         </PostPageBlock>
       </article>
     </>
