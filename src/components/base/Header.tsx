@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 import { themedPalette } from '../../../styles/theme'
 import Responsive from '../common/Responsive'
-import HeaderLogo from './HeaderLogo'
+import {HeaderLogo, ThemeToggleButton} from '../base/index'
 // import HeaderNavigation from './HeaderNavigation'
-import ThemeToggleButton from './ThemeToggleButton'
 
 export interface HeaderProps {}
 

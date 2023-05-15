@@ -8,10 +8,10 @@ import { remarkCodeHike } from '@code-hike/mdx'
 import theme from 'shiki/themes/dracula.json'
 import { postFilePaths, POST_PATH } from '../../src/lib/mdxUtils'
 import Responsive from '../../src/components/common/Responsive'
-import PostHeader from '../../src/components/post/PostHeader'
+import { PostHeader } from '../../src/components/post'
 import { FrontMatterTypes } from '../../src/types/type'
 // import PostContents from '../../src/components/post/PostContents'
-import SEO from '../../src/components/base/SEO'
+import { SEO } from '../../src/components/base/index'
 import { useRouter } from 'next/router'
 import { Suspense, lazy } from 'react'
 
@@ -40,7 +40,7 @@ export default function PostPage({ frontMatter, mdxSource }: PostPageProps) {
         <PostPageBlock>
           <PostHeader {...frontMatter} />
           {/* 본문 내용 */}
-            <PostContents mdxSource={mdxSource} />
+          <PostContents mdxSource={mdxSource} />
         </PostPageBlock>
       </article>
     </>

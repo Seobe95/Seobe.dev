@@ -1,8 +1,5 @@
-import { Suspense } from 'react'
 import styled from 'styled-components'
-import Loading from '../../../pages/loading'
-import Footer from '../base/Footer'
-import Header from '../base/Header'
+import {Header, Footer} from '../base/index'
 export interface LayoutProps {
   children: React.ReactNode
 }

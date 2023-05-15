@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { mediaQuery } from '../../../styles/media'
-import { themedPalette } from '../../../styles/theme'
 
 export interface ResponsiveProps {
   className?: string

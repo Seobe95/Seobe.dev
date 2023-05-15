@@ -36,10 +36,6 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [router])
   return (
     <>
-      <GlobalStyle />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
       <Head>
         <script
           dangerouslySetInnerHTML={{
@@ -56,6 +52,10 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
+      <GlobalStyle />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   )
 }
