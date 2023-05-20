@@ -1,7 +1,5 @@
 import Head from 'next/head'
 import { metaDefaultKeywords } from '../../constants/metaKeywords'
-import { GA_TRACKING_ID } from '../../lib/gtag'
-import Script from 'next/script'
 
 interface SEOProps {
   title?: string

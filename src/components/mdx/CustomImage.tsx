@@ -43,7 +43,7 @@ export default function CustomImage(props: any) {
       title={title}
       width={768}
       height={402}
-      style={{ height: `${height}px` }}
+      style={{ height: "auto" }}
       priority
     />
   )
