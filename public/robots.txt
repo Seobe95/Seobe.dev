@@ -6,7 +6,7 @@ Disallow: /tags
 Disallow: /loading
 
 # Host
-Host: https://seobe-dev.vercel.app/
+Host: https://seobe-dev.com/
 
 # Sitemaps
-Sitemap: https://seobe-dev.vercel.app/sitemap.xml
+Sitemap: https://seobe-dev.com/sitemap.xml

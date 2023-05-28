@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://seobe-dev.vercel.app/',
+  siteUrl: 'https://seobe-dev.com/',
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [
