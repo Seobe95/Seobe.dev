@@ -12,6 +12,7 @@ export default function MyDocument(): ReactElement {
       <Head>
         {/* <link rel="stylesheet" href="/styles.css" /> */}
         <meta name="google-site-verification" content="IbBacN3W5LegV-0WiyvBl2hkhESqmHXxb9B1Ar39qTw" />
+        <meta name="google-site-verification" content="b9_eIOOy-BaWolfTW-Zix6Yphn7WXwfcZKZkvc9MlzU" />
       </Head>
       <GlobalStyle />
       <body>
