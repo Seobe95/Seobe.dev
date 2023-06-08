@@ -109,7 +109,7 @@ const Post = ({
   link: string
   data: FrontMatterTypes
   filePath: string
-  imageProps: {
+  imageProps?: {
     img: {
       src: string
       type: string
@@ -124,14 +124,17 @@ const Post = ({
     <article key={filePath}>
       <Link as={link} href={`/posts/[slug]`} shallow>
         <PostBlock>
-          <ImageContainer
-            alt={`${title}의 대표이미지`}
-            {...imageProps.img}
-            style={{ width: 'auto', height: 'auto' }}
-            blurDataURL={imageProps.blurDataURL}
-            placeholder="blur"
-            priority
-          />
+          {imageProps && (
+            <ImageContainer
+              alt={`${title}의 대표이미지`}
+              {...imageProps.img}
+              style={{ width: 'auto', height: 'auto' }}
+              blurDataURL={imageProps.blurDataURL}
+              placeholder="blur"
+              priority
+            />
+          )}
+
           <TitleBox>
             <div>
               <h2>{title}</h2>

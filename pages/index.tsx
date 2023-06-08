@@ -14,7 +14,7 @@ export interface HomePageProps {
   posts: {
     data: FrontMatterTypes
     filePath: string
-    imageProps: {
+    imageProps?: {
       img: {
         src: string
         type: string
@@ -47,14 +47,20 @@ export async function getStaticProps() {
     postFilePaths.map(async (filePath) => {
       const source = fs.readFileSync(path.join(POST_PATH, filePath))
       const { data } = matter(source)
-      const { base64, img } = await getPlaiceholder(data.thumbnail)
+      if (data.thumbnail) {
+        const { base64, img } = await getPlaiceholder(data.thumbnail)
+        return {
+          data,
+          filePath,
+          imageProps: {
+            blurDataURL: base64,
+            img,
+          },
+        }
+      }
       return {
         data,
         filePath,
-        imageProps: {
-          blurDataURL: base64,
-          img,
-        },
       }
     }),
   )

@@ -29,7 +29,7 @@ export default function SEO({ description, image, title, url, tags }: SEOProps) 
       <link rel="icon" href="/favicon.ico" />
       <meta name="description" content={description || '프론트엔드 개발자 Seobe의 블로그'} />
       <meta name="keywords" content={keywordsContent} />
-      <meta property="og:site_name" content="Seobe-dev.vercel.app" />
+      <meta property="og:site_name" content="seobe-dev.com" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title || 'Seobe.dev'} />
       <meta property="og:description" content={description || '프론트엔드 개발자 Seobe의 블로그'} />

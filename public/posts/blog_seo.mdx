@@ -1,0 +1,106 @@
+---
+title: 블로그에 SEO 적용하기
+description: 블로그에 SEO에 관련된 것들을 적용했습니다.
+tags: ["Next.js", "블로그", "SEO", "next-sitemap", "seobe.dev", "google search console", "site-map", "robot.txt"]
+date: '2023년 6월 8일'
+thumbnail: '/thumbnail/seo.jpg'
+---
+<figure>![블로그에 SEO 적용하기 썸네일 이미지](/thumbnail/seo.jpg "포스트 대표 이미지")<figcaption>무료 seo 이미지 - <a href="https://www.vecteezy.com/vector-art/2214070-flat-design-concept-seo-search-engine-optimize-vector-illustrate">출처</a></figcaption></figure>
+___
+## Intro
+아무리 좋은 서비스를 만들었다 하여도, 사람들에게 노출이 되지 않으면 서비스 자체를 만날 수 없습니다. SEO를 잘 설정해놓으면, 사람들이 검색한 단어와 연관된 웹 서비스를 노출시킬 수 있고, 이는 결국 서비스에 유입이 될 수 있습니다.
+
+오늘 글의 주제는 SEO와 이를 제 블로그에 설정한 과정입니다.
+
+블로그를 만든 이유는 개발을하며 배운 내용들을 정리하고, 제가 원하는 템플릿을 만들기 위해서도 있지만, 다른 사람들에게 제 블로그 내용들을 **다른 사람들과 공유하는 것**이 가장 큰 이유입니다. 이를 위해선 기본적으로 **SEO**를 적용하여 구글 및 타 사이트에서 검색이 되도록 만들어야 합니다. 이를 하기 위해서는, **SEO**를 위해 몇 가지 과정을 거쳐야 하는데요, 이러한 과정들을 서술하기 앞서, **SEO**에 대해 간단하게 알아보겠습니다.
+
+## SEO
+SEO란 Search Engine Optimization의 약자이며, **검색 엔진 최적화**입니다. 
+
+> 검색엔진 최적화란 검색엔진이 콘텐츠를 이해하고 제공하도록 돕는 것입니다. - [Google](https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ko)
+
+각 사이트(네이버, 구글, 다음 등..)의 검색엔진이 내 사이트를 보다 더 쉽게 이해할 수 있도록 만들어 주는 것이라고 생각할 수 있습니다.
+
+구글이 설명하는 내용을 보면, 구글은 웹 크롤러를 사용하는 완전히 자동화된 검색엔진이고, 이 웹 크롤러는 지속적으로 웹을 탐색하면서 Google 색인에 추가할 사이트를 찾습니다. 
+
+이를 쉽게 확인할 수 있는 곳이 [구글 서치 콘솔](https://search.google.com/search-console/about)입니다. 여기에 본인의 서비스를 등록하는 방법은 
+해당 사이트에 잘 나와있으니, 참고하시기 바랍니다.
+
+먼저 [구글 서치 콘솔](https://search.google.com/search-console/about)에 등록하기 전, 블로그에 추가로 설정해야 할 것들이 있습니다. 바로 **meta-tag**와 **site-map**입니다.
+
+## meta tag 설정하기
+> __&lt;meta&gt;__ 요소는 __&lt;base&gt;__ , __&lt;link&gt;__ , __&lt;script&gt;__ , __&lt;style&gt;__ , __&lt;title&gt;__ 과 같은 다른 메타관련 요소로 나타낼 수 없는 **메타데이터**를 나타냅니다. - [출처](https://developer.mozilla.org/ko/docs/Web/HTML/Element/meta)
+
+> 메타데이터의 가장 단순한 정의는 데이터를 설명하는 데이터입니다. HTML의 __&lt;head&gt;__ 안에는 문서 작성자나 문서 요약과 같이 문서를 설명하는 데이터, 즉 메타데이터를 넣을 수 있습니다. - [출처](https://developer.mozilla.org/ko/docs/Glossary/Metadata)
+
+즉, **meta tag**는 이 웹 서비스를 설명할 수 있는 tag입니다. 위의 **SEO**와 비슷한 맥락으로, 이 서비스는 무엇을 나타내고, 무엇을 포함하며, 주제는 무엇인지 등등을 설명하는 곳입니다.
+
+저는 이 **meta tag**를 SEO라는 컴포넌트를 만들어 다음과 같이 관리하는 중입니다. 
+
+```typescript SEO.tsx
+export default function SEO({ description, image, title, url, tags }: SEOProps) {
+  return (
+    <Head>
+      <title>{title ? `${title} | Seobe.dev` : 'Seobe.dev'}</title>
+      <link rel="icon" href="/favicon.ico" />
+      <meta name="description" content={description || '프론트엔드 개발자 Seobe의 블로그'} />
+      <meta name="keywords" content={keywordsContent} />
+      <meta property="og:site_name" content="seobe-dev.com" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={title || 'Seobe.dev'} />
+      <meta property="og:description" content={description || '프론트엔드 개발자 Seobe의 블로그'} />
+      <meta property="og:url" content={url ? `${baseUrl}${url}` : baseUrl} />
+      <meta property="og:image" content={image ? `${baseUrl}${image}` : `${baseUrl}/image.png`} />
+      <meta property="og:image:width" content="800" />
+      <meta property="og:image:height" content="400" />
+    </Head>
+  )
+}
+```
+다음과 같이 설정을 해놓으면, 블로그에서 생성되는 정적 페이지들(기본 홈페이지, 각 포스트 글들 등..)에 알맞은 **meta tag**를 설정할 수 있습니다.
+
+## Site map & robot.txt
+> **사이트맵**은 사이트에 있는 페이지, 동영상 및 기타 파일과 그 관계에 관한 정보를 제공하는 파일입니다. Google과 같은 검색엔진은 이 파일을 읽고 사이트를 더 효율적으로 크롤링합니다. 사이트맵은 내가 사이트에서 중요하다고 생각하는 페이지와 파일을 Google에 알리고 중요한 관련 정보를 제공합니다. 관련 정보의 예로는 페이지가 마지막으로 업데이트된 시간, 페이지의 대체 언어 버전이 있습니다. - [출처](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?hl=ko)
+
+> **robots.txt** 파일은 크롤러가 사이트에서 액세스할 수 있는 URL을 검색엔진 크롤러에 알려 줍니다. 이 파일은 주로 요청으로 인해 사이트가 오버로드되는 것을 방지하기 위해 사용하며, 웹페이지가 Google에 표시되는 것을 방지하기 위한 메커니즘이 아닙니다. 웹페이지가 Google에 표시되지 않도록 하려면 noindex로 색인 생성을 차단하거나 비밀번호로 페이지를 보호해야 합니다. - [출처](https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=ko)
+
+사이트맵을 설정해야 크롤링 봇들이 첫 웹페이지에 진입했을 때, 이 웹에는 어떤 구조로 되어있는지를 알 수 있습니다. 그리고 **robot.txt**로, 접근 가능한 URL을 크롤링 봇에게 알려줄 수 있습니다.
+
+이를 쉽게 설명하자면, 일종의 지도와 안내문 같은 거죠. 모든 곳을 볼 수 있지만, 이곳은 가지 말라고 하는 안내문 처럼, 사이트의 크롤링 봇들에게 안내를 해주는 것입니다. 저는 이 두 가지를 [next-sitemap](https://github.com/iamvishnusankar/next-sitemap)이라는 라이브러리를 활용했습니다.
+
+제가 사용한 방법은 다음과 같습니다. _(틀릴 수 있으니 [공식문서](https://github.com/iamvishnusankar/next-sitemap)를 꼭 참조해주세요!)_
+```javascript next-sitemap.config.js
+/** @type {import('next-sitemap').IConfig} */
+module.exports = {
+  siteUrl: 'https://seobe-dev.com/',
+  generateRobotsTxt: true,
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ["/보여주고싶지않은", "/url을", "/입력하세요."],
+      },
+    ],
+  },
+}
+```
+정말 기본적인 설정입니다. **generateRobotsTxt**설정을 이용하여 **sitemap.xml**과 함께 **robot.txt**를 생성하도록 했습니다. 이렇게 설정 후, 블로그 글을 작성하고 **yarn build**명령어를 입력해서 새로운 페이지가 추가될 때(블로그 포스트 추가)마다 **site-map**을 최신화 시켜줍니다.
+
+주의할 점으로는, 위의 **robot.txt**의 설명처럼, 단순히 Google에 표시되는 것을 방지하는 메커니즘이 아니므로, 보여주고 싶지 않은 페이지는 따로 확실하게 관리가 필요할 것 같습니다.
+
+## Google Search Console
+대략적인 **meta tag**설정이 끝났으면, 서치 콘솔을 이용해서 나의 웹 서비스를 구글이 크롤링한 결과들을 확인할 수 있고, 추가로 **site-map**에서 확인되는 페이지들의 색인을 제외시키거나 크롤릴 요청을 보낼 수 있습니다.
+
+현재 제 블로그는 최근 도메인을 변경해서, 기존에 크롤링 되어있던 자료들을 삭제 신청 후 새로운 도메인의 페이지들의 색인 생성을 요청하고 있습니다.
+
+<figure>![google search console 스크린샷](/images/google_search.png "google search console 스크린샷")<figcaption>구글님들,, 조금만 빨리 만들어주세요..</figcaption></figure>
+
+내 웹사이트의 크롤링, 색인 등을 관리하고 여러가지 데이터를 확인할 수 있지만, 생각보다 오래걸린다는 단점이 있습니다. 
+
+## 마무리하면서
+이렇게 제 블로그에 **SEO**를 적용해서 웹사이트에 노출시키는 과정을 한 번 정리해봤습니다. 단순히 **Next.js**를 사용한다고 해서 자동적으로 내 웹 서비스를 노출시킬 수 있는게 아니라, 조금 더 신경쓰고 추가적인 과정을 거쳐야 확실하고 효과적으로 노출시킬 수 있다는 것을 알 수 있었습니다. 
+
+여러분들도 **SEO**를 적용해보시는 것은 어떨까요?
+__________
+_잘못된 내용이 있다면 <a href={'mailto:seobe95@gmail.com'} title="mail">메일</a> 혹은 <a href={"https://github.com/Seobe95/Seobe.dev"} target="_blank">github</a>에 남겨주시면 감사드리겠습니다!_
