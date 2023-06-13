@@ -13,7 +13,7 @@ import { FrontMatterTypes } from '../../src/types/type'
 // import PostContents from '../../src/components/post/PostContents'
 import { SEO } from '../../src/components/base/index'
 import { useRouter } from 'next/router'
-import { Suspense, lazy } from 'react'
+import { lazy } from 'react'
 
 interface PostPageProps {
   mdxSource: MDXRemoteSerializeResult

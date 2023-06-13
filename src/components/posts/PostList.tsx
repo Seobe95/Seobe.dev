@@ -5,6 +5,7 @@ import { themedPalette } from '../../../styles/theme'
 import { FrontMatterTypes } from '../../types/type'
 import response from '../../../styles/responsive'
 import { HomePageProps } from '../../../pages'
+import { changeKoreanDate } from '../../lib/changeKoreanDate'
 
 /** 블로그 포스트 리스트 UI를 담당하는 컴포넌트입니다. - PostList
  *  각 포스트에 대한 UI도 포함되어 있습니다. - PostItem
@@ -120,6 +121,8 @@ const Post = ({
   }
 }) => {
   const { date, description, title } = data
+  const koreanDate = changeKoreanDate(date);
+
   return (
     <article key={filePath}>
       <Link as={link} href={`/posts/[slug]`} shallow>
@@ -141,7 +144,7 @@ const Post = ({
               <h3>{description}</h3>
             </div>
             <div>
-              <h4>{date}</h4>
+              <h4>{koreanDate}</h4>
             </div>
           </TitleBox>
         </PostBlock>
@@ -155,18 +158,22 @@ export default function PostList({ posts }: HomePageProps) {
     <section>
       <h1>최근 작성한 글</h1>
       <PostListBlock>
-        {posts.map((post) => {
-          const filePath = post.filePath
-          return (
-            <Post
-              filePath={filePath}
-              link={`/posts/${filePath.replace(/\.mdx?$/, '')}`}
-              key={filePath}
-              data={post.data}
-              imageProps={post.imageProps}
-            />
-          )
-        })}
+        {posts
+          .sort((a, b) => {
+            return new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+          })
+          .map((post) => {
+            const filePath = post.filePath
+            return (
+              <Post
+                filePath={filePath}
+                link={`/posts/${filePath.replace(/\.mdx?$/, '')}`}
+                key={filePath}
+                data={post.data}
+                imageProps={post.imageProps}
+              />
+            )
+          })}
       </PostListBlock>
     </section>
   )

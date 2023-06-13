@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import responsive from '../../../styles/responsive'
 import { themedPalette } from '../../../styles/theme'
 import { FrontMatterTypes } from '../../types/type'
+import { changeKoreanDate } from '../../lib/changeKoreanDate'
 
 const PostHeaderBlock = styled.section`
   margin-bottom: 3rem;
@@ -58,10 +59,11 @@ const TagContent = styled(Link)`
 // }
 
 export default function PostHeader({title, description, tags, date}: FrontMatterTypes) {
+  const koreanDate = changeKoreanDate(date)
   return (
     <PostHeaderBlock>
       <h1>{title}</h1>
-      <p>{date}</p>
+      <p>{koreanDate}</p>
       {/* <TagsBlock>
         {tags.map((tag, index) => (
           <Tag value={tag} key={index} />
