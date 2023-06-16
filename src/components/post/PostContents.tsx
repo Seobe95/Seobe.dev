@@ -77,9 +77,17 @@ const PostContentsBlock = styled.section`
     font-style: italic;
   }
 
+  /** 코드 블럭 부모 div */
   .ch-codegroup {
     @media (max-width: 425px) {
       margin: 1rem 0rem;
+    }
+  }
+
+  /** 코드 블럭 내부 div - scroll에 영향 */
+  .ch-code-scroll-parent {
+    @media (max-width: 425px) {
+      width: 100%;
     }
   }
 `
