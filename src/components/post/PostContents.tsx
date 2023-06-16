@@ -62,6 +62,7 @@ const PostContentsBlock = styled.section`
     border-radius: 8px;
     margin: 1rem 2.5rem;
     @media (max-width: 425px) {
+      margin: 1rem 0rem;
       padding: 8px 16px;
     }
   }
@@ -74,6 +75,12 @@ const PostContentsBlock = styled.section`
     text-align: center;
     font-size: 0.75rem;
     font-style: italic;
+  }
+
+  .ch-codegroup {
+    @media (max-width: 425px) {
+      margin: 1rem 0rem;
+    }
   }
 `
 
