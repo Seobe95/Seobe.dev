@@ -1,8 +1,8 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import styled from 'styled-components'
 import { themedPalette } from '../../../styles/theme'
-import {CustomH2, CustomFigure, CustomImage} from '../mdx/index'
-import {CH} from '@code-hike/mdx/components'
+import { CustomH2, CustomFigure, CustomImage } from '../mdx/index'
+import { CH } from '@code-hike/mdx/components'
 
 interface PostContentsProps {
   mdxSource: MDXRemoteSerializeResult
@@ -80,7 +80,7 @@ const PostContentsBlock = styled.section`
   /** 코드 블럭 부모 div */
   .ch-codegroup {
     @media (max-width: 425px) {
-      margin: 1rem 0rem;
+      margin: 1rem 0rem !important;
     }
   }
 
