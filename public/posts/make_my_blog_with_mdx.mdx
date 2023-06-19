@@ -1,0 +1,134 @@
+---
+title: Next.js로 블로그 만들기 - MDX
+description: MDX를 활용해서 블로그 만들기
+tags: ["Next.js", "블로그", "MDX", "Next.js 블로그 만들기", "Seobe.dev"]
+date: '2023-06-19'
+---
+## 들어가면서
+이 블로그를 운영하기 전 [Tistory 블로그](https://seobe22.tistory.com/)를 운영하고 있었고,지금 블로그에 올라간 내용들을 아직 그 블로그에 올리고 있습니다. 사실, 제가 제목을 잘못 적었습니다. Next.js로 블로그 만들기라는 제목을 가지고 있지만, 블로그를 만드는 내용보다 다크모드를 적용한 내용을 적었기 때문에, 제 블로그를 방문하는 분들이 충분한 정보를 얻어가지 못했을 거라 생각됩니다.
+
+그래서 지금, 미처 남기지 못했던 내용들을 적어보려 합니다.
+
+## MDX
+이 블로그는 **Next.js**와 **MDX**를 활용해서 만들어져 있습니다. **MDX**는 마크다운과 JSX를 섞은 _<del>끔찍한 혼종</del>_ 입니다. 사실 이렇게 블로그를 만들고 있는 도중에도 완벽하게 사용하고 있는 기분이 들지 않고, 글을 작성해나가면서 생기는 오류들을 수정하면서 작성하고 있습니다.
+
+그럼에도 불구하고 제가 괜찮다고 생각하는 이점 중 하나는 **커스텀**이 가능해집니다. 내가 자주 사용하는 태그들, _`<strong>`_ 혹은 _`<h1>`_ 과 같은 태그들을 제가 원하는 모양으로 커스텀할 수 있고, 이것을 제가 수정하지 않는 한 계속 사용할 수 있다는 점이죠. 즉, 마크 다운 문법 안에서 컴포넌트를 불러올 수 있다는 것입니다. 그러면 제가 MDX를 사용한 방법을 말씀드리겠습니다.
+
+## 적용방법
+사실, 자세한 내용은 [Next.js 공식문서](https://nextjs.org/docs/pages/building-your-application/configuring/mdx)에 잘 나와있습니다. 
+여기서 저는 [Remote MDX](https://nextjs.org/docs/pages/building-your-application/configuring/mdx#remote-mdx)를 보고 제 블로그에 적용했고, 이 [예시 Github](https://github.com/vercel/next.js/tree/canary/examples/with-mdx-remote)도 **Next.js**에서 운영중입니다. 제가 따로 적용하는 방법을 나열하기 보다, 이 링크들을 참조하여 초기 설정을 하는 것이 좋을 것 같습니다.
+
+초기 세팅이 되었다면, 이제 **.mdx**파일을 특정 컴포넌트(혹은 페이지)로 불러오고, 해석하여 방문자들이 볼 수 있도록 만들어야합니다. 
+
+저는 **MDX**파일을 **public**폴더 내 **posts**폴더에 위치시키고 있습니다. 이 파일들을 불러오는 과정을 설명하겠습니다.
+
+Node.js에서 파일 입출력 처리를 할 때 사용하는 **fs**와 **path**모듈을 활용하여 진행하여 따로 **MDX**파일의 위치를 불러오겠습니다.
+
+다음은 제가 **MDX**파일을 불러오는 코드입니다.
+> 💡 해당 코드는 [감구마님의 글](https://gamguma.dev/post/2022/01/nextjs-blog-development-review)과 해당 github를 많이 참고하였습니다.
+```typescript mdxUtils.ts
+import fs from 'fs'
+import path from 'path'
+
+export const POST_PATH = path.join(process.cwd(), `${process.env.NEXT_PUBLIC_LOCAL_POST_PATH}`)
+export const postFilePaths = fs.readdirSync(POST_PATH).filter((path) => /\.mdx?$/.test(path))
+```
+위의 코드 중 _`path.join()`_ 은 파리미터로 들어오는 것들을 조합하여 경로를 만들어 줍니다. _`process.cwd()`_ 는 해당 메서드를 호출한 곳의 절대경로이고, _`process.env.NEXT_PUBLIC_LOCAL_POST_PATH`_ 는 제가 설정한 경로입니다.
+
+이렇게 **MDX**의 경로를 알아냈으면, _`fs.readdirSync()`_ 를 활용하여 해당 폴더 내부에 _`.mdx`_ 가 들어간 파일들을 반환해서 경로를 확인합니다.
+
+현재 제 블로그의 페이지는 다음과 같이 분류가 가능합니다.
+- 포스팅 리스트 페이지 - /
+- 포스팅 상세보기 - /posts/...
+
+이렇게 된다면, 각각의 페이지에서 필요한 **MDX**파일의 정보가 다를 것입니다. 처음 방문자가 보게되는 홈 페이지에서는, 작성글에 대한 제목, 날짜, 간략한 설명, 썸네일 등이 필요할 것입니다. 현재 제가 사용하고 있는 것도 그렇게 4가지만 홈페이지에서 사용중이구요. 이 정보들을 사용하기 위해, [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote)라는 라이브러리를 사용합니다. 해당 라이브러리는 front-matter라는 **MDX**파일 내 특정 데이터를 구분하여 데이터를 뽑아낼 수 있고, **MDX**파일을 렌더링 하는데도 사용됩니다.
+``` mdx
+---
+title: Hello
+slug: home
+---
+<h1>Hello world!</h1>
+```
+이렇게 작성하면, 해당 라이브러리를 통해 각 **MDX**파일에 작성되어있는 것들을 객체로 받을 수 있습니다.
+``` json
+{
+  content: '<h1>Hello world!</h1>',
+  data: { 
+    title: 'Hello', 
+    slug: 'home' 
+  }
+}
+```
+자, 그러면 이 파일들을 불러오고 제가 원하는 데이터를 추출해보겠습니다.
+
+## getStaticProps
+먼저, Next.js의 **getStaticProps**메서드를 활용하여 각 **MDX**파일들을 가져와 **gray-matter**를 통해서 필요한 데이터를 추출해보겠습니다.
+``` typescript index.tsx
+export async function getStaticProps() {
+  const posts = await Promise.all(
+      postFilePaths.map(async (filePath) => {
+        const source = fs.readFileSync(path.join(POST_PATH, filePath))
+        const mdxSource = await serialize(source, { parseFrontmatter: true })
+        ...
+        return {
+          data: mdxSource.frontmatter,
+          filePath
+        }
+      })
+  )
+
+  return {props : {posts}}
+}
+```
+위의 코드처럼 각 **MDX**파일들의 경로를 불러오고, 해당 경로를 활용하여 파일을 가져와 _`serialize()`_ 를 활용하여 위에서 언급한 데이터들을 객체화하여 props로 내려주고, 원하시는대로 활용하시면 됩니다.
+
+그리고, 한 포스트를 선택했을 때 filePath를 활용하여 정확한 주소로 이동하게 됩니다. 
+
+마지막으로 어떻게 **MDX**를 렌더링 할지만 설정해주면 됩니다.
+
+## getStaticPaths
+저는 page 폴더 내부 posts폴더를 만들고 여기에서 **MDX**를 렌더링합니다. 여기서 [getStaticPaths](https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths)를 활용해서, 해당 주소(.../posts/...)에서 활용 될 paths를 만들어 봅시다.
+``` typescript
+export const getStaticPaths = async () => {
+  const paths = postFilePaths.map((path) => path.replace(/\.mdx?$/, '')).map((slug) => ({ params: { slug } }))
+  return {
+    paths,
+    fallback: false,
+  }
+}
+```
+여기서 paths를 _`console.log()`_ 로 확인해보면 제가 만들어 놓은 **MDX**의 주소들이 나오게 됩니다.
+만약 여기에 나오는 paths를 제외한 다른 경로로 이동하게 되면 404페이지를 만나게 되는 것이죠.
+
+이제 params에 slug를 담아 반환하게 된다면, **getStaticProps**에서 마지막으로 slug를 활용하여 해당 경로에 맞는 **MDX**를 불러와 렌더링하면 됩니다!
+
+## 렌더링!
+위에서 언급한 것처럼, **getStaticProps**에서 params를 활용하여 다시 MDX를 불러오고, next-mdx-remote를 활용하여 렌더링합니다.
+``` typescript
+export const getStaticProps = async ({ params }: { params: { slug: string } }) => {
+  const postFilePath = path.join(POST_PATH, `${params.slug}.mdx`)
+  const source = fs.readFileSync(postFilePath)
+  const mdxSource = await serialize(source, {
+    mdxOptions: {
+      remarkPlugins: [[remarkCodeHike, { theme, autoImport: false }]],
+      useDynamicImport: true,
+    },
+    parseFrontmatter: true,
+  })
+
+  return ...
+}
+```
+저는 코드블럭을 사용하는데 [Code Hike](https://codehike.org/)를 사용하여 해당 설정을 해주었습니다.
+
+이제, 조금의 코드를 더해서 본인의 블로그를 꾸며 나가시면 됩니다!
+
+## 마무리하면서
+사실, 블로그를 만들고 꾸며나가면서 아직도 오류들이 뻥뻥 터지기도 하고, 애널리틱스를 사용하면서 추가해줘야 할 설정들도 많고, 많이 부족함을 느끼기며 머리도 아프지만, 이렇게 글을 적으면서도 몰랐던 태그들을 사용하기도 하고, 다른 사람들이나 기술 블로그등을 보면서 이쁜 디자인을 _<del>배껴</del>_ 활용하기도 합니다.
+
+사실 이렇게 글을 적다보면 개발했을 때 사용했던 것보다 더 머리를 많이 사용하는 것 같습니다. 사실 작성하면서 이런게 있었네? 하면서 코드도 실제로 수정하기도 했구요..ㅎㅎ 
+
+조금이나마 막막하셨던 분들이 이 글을 보고 답답함이 조금이나마 풀리셨으면 좋겠습니다. 감사합니다.
+
+__________
+_잘못된 내용이 있다면 <a href={'mailto:seobe95@gmail.com'} title="mail">메일</a> 혹은 <a href={"https://github.com/Seobe95/Seobe.dev/issues/1"} target="_blank">github</a>에 남겨주시면 감사드리겠습니다!_

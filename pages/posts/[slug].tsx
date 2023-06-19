@@ -50,19 +50,18 @@ export default function PostPage({ frontMatter, mdxSource }: PostPageProps) {
 export const getStaticProps = async ({ params }: { params: { slug: string } }) => {
   const postFilePath = path.join(POST_PATH, `${params.slug}.mdx`)
   const source = fs.readFileSync(postFilePath)
-  const { content, data } = matter(source)
-  const mdxSource = await serialize(content, {
+  const mdxSource = await serialize(source, {
     mdxOptions: {
       remarkPlugins: [[remarkCodeHike, { theme, autoImport: false }]],
       useDynamicImport: true,
     },
-    scope: data,
+    parseFrontmatter: true,
   })
 
   return {
     props: {
       mdxSource: mdxSource,
-      frontMatter: data,
+      frontMatter: mdxSource.frontmatter,
     },
   }
 }

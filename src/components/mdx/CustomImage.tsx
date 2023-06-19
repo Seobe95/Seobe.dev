@@ -1,19 +1,3 @@
-// import Image from 'next/image'
-
-// export default function CustomImage(props: any) {
-//   const { title, alt, src } = props
-//   return (
-//     <Image
-//       src={src}
-//       alt={alt}
-//       title={title}
-//       width={765}
-//       height={512}
-//       sizes="(max-width: 765px) 765px, (max-width: 375px) 375px, 765px"
-//       priority
-//     />
-//   )
-// }
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
@@ -43,7 +27,7 @@ export default function CustomImage(props: any) {
       title={title}
       width={768}
       height={402}
-      style={{ height: "auto" }}
+      style={{ height: "auto", maxHeight: "402" }}
       priority
     />
   )

@@ -9,6 +9,7 @@ import PostList from '../src/components/posts/PostList'
 import { FrontMatterTypes } from '../src/types/type'
 import SEO from '../src/components/base/SEO'
 import { getPlaiceholder } from 'plaiceholder'
+import { serialize } from 'next-mdx-remote/serialize'
 
 export interface HomePageProps {
   posts: {
@@ -46,11 +47,11 @@ export async function getStaticProps() {
   const posts = await Promise.all(
     postFilePaths.map(async (filePath) => {
       const source = fs.readFileSync(path.join(POST_PATH, filePath))
-      const { data } = matter(source)
-      if (data.thumbnail) {
-        const { base64, img } = await getPlaiceholder(data.thumbnail)
+      const mdxSource = await serialize(source, { parseFrontmatter: true })
+      if (mdxSource.frontmatter?.thumbnail) {
+        const { base64, img } = await getPlaiceholder(mdxSource.frontmatter.thumbnail)
         return {
-          data,
+          data: mdxSource.frontmatter,
           filePath,
           imageProps: {
             blurDataURL: base64,
@@ -59,7 +60,7 @@ export async function getStaticProps() {
         }
       }
       return {
-        data,
+        data: mdxSource.frontmatter,
         filePath,
       }
     }),

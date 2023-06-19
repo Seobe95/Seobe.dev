@@ -122,7 +122,6 @@ const Post = ({
 }) => {
   const { date, description, title } = data
   const koreanDate = changeKoreanDate(date);
-
   return (
     <article key={filePath}>
       <Link as={link} href={`/posts/[slug]`} shallow>
