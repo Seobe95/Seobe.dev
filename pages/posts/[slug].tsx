@@ -14,6 +14,7 @@ import { FrontMatterTypes } from '../../src/types/type'
 import { SEO } from '../../src/components/base/index'
 import { useRouter } from 'next/router'
 import { lazy } from 'react'
+import Comment from '../../src/components/common/Comment'
 
 interface PostPageProps {
   mdxSource: MDXRemoteSerializeResult
@@ -42,6 +43,7 @@ export default function PostPage({ frontMatter, mdxSource }: PostPageProps) {
           {/* 본문 내용 */}
           <PostContents mdxSource={mdxSource} />
         </PostPageBlock>
+        <Comment />
       </article>
     </>
   )
